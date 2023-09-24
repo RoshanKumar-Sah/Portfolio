@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import { Open_Sans, Poppins } from 'next/font/google'
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/slice/userSlice";
 import ProtectedPageLogin from "@/components/ProtectedPage";
-
+import PulseLoader from "react-spinners/PulseLoader";
+import { Size } from "tsparticles-engine";
 
 
 const poppins500 = Poppins({ subsets: ['latin'], weight: "500" })
@@ -19,15 +20,29 @@ function Login() {
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false)
-
+  const [spinnerColor, setSpinnerColor] = useState("#000000")
   const router = useRouter();
   const dispatch = useDispatch();
 
+  const mode = useSelector((redux_store) => {
+    return redux_store.mode.value
+  })
+
   useEffect(() => {
     if (userName && password) {
-      setDisable(false);
+      setDisable(false)
+    } else {
+      setDisable(true)
     }
   }, [userName, password]);
+
+  useEffect(() => {
+    if (mode) {
+      setSpinnerColor("#000000")
+    } else{
+      setSpinnerColor("#ffffff")
+    }
+  }, [mode])
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -45,11 +60,11 @@ function Login() {
         // console.log(res.data.username);
         dispatch(setUser(res.data.username))
         localStorage.setItem("PortToken", res.data.token)
-        
+
         // setSubmitting(false)
         router.push("/")
       }).catch(err => {
-console.log(err);
+        console.log(err);
         toast.error(err?.response?.data?.msg, {
           position: toast.POSITION.TOP_RIGHT,
           theme: "colored"
@@ -64,6 +79,9 @@ console.log(err);
           }
           )
         }
+
+
+
         setSubmitting(false)
         // console.log(errors);
       })
@@ -74,7 +92,7 @@ console.log(err);
   }
 
   return (
-    <main className="bg-background w-full align-middle flex justify-center">
+    <main className={`animeColor ${mode ? 'bg-backgroundNight text-headerLight' : 'bg-backgroundLight text-headerNight'} w-full align-middle flex justify-center`}>
 
       <div className="mt-1/2">
         <ToastContainer className="mt-60" />
@@ -92,7 +110,7 @@ console.log(err);
             type="text"
             id="text"
             name="userName"
-            className="bg-gray-50 border border-gray-300 text-header text-sm rounded-lg  block w-full p-2.5 outline-none"
+            className="bg-gray-50 border border-gray-300 text-headerNight text-sm rounded-lg  block w-full p-2.5 outline-none"
             placeholder="username"
             value={userName}
             onChange={(e) => {
@@ -111,7 +129,7 @@ console.log(err);
             type="password"
             id="password"
             name="password"
-            className="bg-gray-50 border border-gray-300 text-header text-sm rounded-lg  block w-full p-2.5 outline-none"
+            className="bg-gray-50 border border-gray-300  text-headerNight text-sm rounded-lg  block w-full p-2.5 outline-none"
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
@@ -122,8 +140,11 @@ console.log(err);
         <button
           type="submit"
           disabled={disable}
-          className={`text-white disabled:bg-header/50 bg-header hover:bg-header rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center`}>
-          Submit
+          className={` ${disable ? 'cursor-not-allowed' : 'cursor-pointer'} ${mode ? 'text-headerNight disabled:bg-backgroundWhite/80 bg-backgroundWhite' : 'text-white disabled:bg-backgroundNight/80 bg-backgroundNight'} rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center`}>
+          
+          {submitting ? <PulseLoader color={spinnerColor} size={10} /> : 'Submit'}
+
+
         </button>
       </form>
     </main>

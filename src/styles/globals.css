@@ -8,6 +8,24 @@ body{
   background-color: #ffffff;
 }
 
+.navLiDay{
+  background: linear-gradient(to right, black 50%, white 50%);
+  background-size: 200% 200%;
+  background-position: right bottom;
+  transition: all .5s ease-out;
+}
+
+.navLiNight{
+  background: linear-gradient(to right, white 50%, black 50%);
+  background-size: 200% 200%;
+  background-position: right bottom;
+  transition: all .5s ease-out;
+}
+
+.navLiDay:hover, .navLiNight:hover{
+  background-position: left bottom;
+}
+
 /* .lgContainer{
   padding-left: 70px;
   padding-right: 70px;
@@ -25,6 +43,10 @@ body{
 
   .navLi{
     @apply capitalize px-[20px] cursor-pointer
+  }
+
+ .animeColor{
+    @apply transition-colors duration-1000
   }
 
 }
