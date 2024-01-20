@@ -1,1 +1,1 @@
-export const URL_DOMAIN = 'http://localhost:5000'
+export const URL_DOMAIN = 'https://portfolio-backend-phi-tawny.vercel.app'

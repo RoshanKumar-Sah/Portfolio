@@ -19,8 +19,10 @@ module.exports = {
         contentLight: "#d1d1d1",
         headerNight: "#333333",
         headerLight: "#dedcdc",
-        textWhite: "#ffffff",
-        backgroundWhite: "#ffffff"
+        textWhite: "#FAF9F6",
+        backgroundWhite: "#ffffff",
+        backgroundGray: "#E9EEF2",
+        borderGray: "#E5EDF4"
       }
     },
   },

@@ -9,6 +9,7 @@ import { setUser } from "@/redux/slice/userSlice";
 import ProtectedPageLogin from "@/components/ProtectedPage";
 import PulseLoader from "react-spinners/PulseLoader";
 import { Size } from "tsparticles-engine";
+import Head from "next/head";
 
 
 const poppins500 = Poppins({ subsets: ['latin'], weight: "500" })
@@ -27,6 +28,8 @@ function Login() {
   const mode = useSelector((redux_store) => {
     return redux_store.mode.value
   })
+
+  const customId = "custom-id-yes";
 
   useEffect(() => {
     if (userName && password) {
@@ -66,15 +69,17 @@ function Login() {
       }).catch(err => {
         console.log(err);
         toast.error(err?.response?.data?.msg, {
-          position: toast.POSITION.TOP_RIGHT,
-          theme: "colored"
+          position: toast.POSITION.BOTTOM_RIGHT,
+          theme: "colored",
+          toastId: customId
         })
 
         if (err?.response?.data?.errors) {
           err.response.data.errors.forEach(er => {
             toast.error(er.message, {
-              position: toast.POSITION.TOP_RIGHT,
-              theme: "colored"
+              position: toast.POSITION.BOTTOM_RIGHT,
+              theme: "colored",
+              toastId: customId
             })
           }
           )
@@ -93,15 +98,18 @@ function Login() {
 
   return (
     <main className={`animeColor ${mode ? 'bg-backgroundNight text-headerLight' : 'bg-backgroundLight text-headerNight'} w-full align-middle flex justify-center`}>
+        <Head><title>Roshan | Admin Login</title></Head>
 
-      <div className="mt-1/2">
-        <ToastContainer className="mt-60" />
-      </div>
-
+     
+        <ToastContainer />
+   
       <form
         className={`${poppins500.className} h-full flex flex-col justify-center customContainer w-full sm:max-w-lg md:max-w-lg`}
         onSubmit={handleSubmit}
       >
+      <div className="animate__animated animate__fadeIn animate__slower">
+                <div>
+
         <div className="mb-6">
           <label htmlFor="text" className="block mb-2 text-sm text-header">
             Username
@@ -140,12 +148,15 @@ function Login() {
         <button
           type="submit"
           disabled={disable}
-          className={` ${disable ? 'cursor-not-allowed' : 'cursor-pointer'} ${mode ? 'text-headerNight disabled:bg-backgroundWhite/80 bg-backgroundWhite' : 'text-white disabled:bg-backgroundNight/80 bg-backgroundNight'} rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center`}>
+          className={` ${disable ? 'cursor-not-allowed' : 'cursor-pointer'} ${mode ? 'text-headerNight disabled:bg-backgroundWhite/80 bg-backgroundWhite' : 'text-white disabled:bg-backgroundNight/80 bg-backgroundNight'} rounded-lg text-sm w-full px-5 py-2.5 text-center`}>
           
           {submitting ? <PulseLoader color={spinnerColor} size={10} /> : 'Submit'}
 
 
         </button>
+
+        </div>
+        </div>
       </form>
     </main>
   );

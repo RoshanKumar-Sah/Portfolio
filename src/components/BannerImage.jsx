@@ -1,6 +1,7 @@
 
 import Banner from "@/assets/banner.jpg"
 import Image from "next/image"
+import Banner2 from "@/assets/Banner2.jpg"
 
 
 import { useCallback } from "react";
@@ -105,7 +106,7 @@ export default function BannerImage(){
             }}
         />
          
-    <Image src={Banner} alt='banner' className='max-w-[400px] h-full  object-cover' />
+    <Image src={Banner2} alt='banner' priority className='max-w-[400px] h-full  object-cover' />
   
     </div>
     )

@@ -17,11 +17,16 @@ export const userSlice = createSlice({
     },
     "stopLoading": (state) => {
       state.isLoading = false
+    },
+
+    "startLoading": (state) => {
+      state.isLoading = true
     }
+
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { setUser, logout, stopLoading } = userSlice.actions
+export const { setUser, logout, stopLoading, startLoading } = userSlice.actions
 
 export default userSlice.reducer

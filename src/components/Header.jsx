@@ -30,7 +30,7 @@ const [out, setOut] = useState(false)
 
 
   return (
-    <header className={`customContainer fixed top-0 w-full flex justify-between items-center h-[50px] lg:h-[70px] select-none animeColor ${mode ? 'bg-backgroundNight text-headerLight' : 'bg-backgroundWhite text-headerNight'} `}>
+    <header className={`customContainer fixed top-0 w-full flex justify-between items-center h-[50px] lg:h-[70px] select-none animeColor ${mode ? 'bg-backgroundNight text-backgroundWhite' : 'bg-backgroundWhite text-headerNight'} `}>
       <h2 className={`uppercase ${open_sans.className} font-extrabold text-2xl tracking-wider cursor-pointer`}><Link href={"/"}>Roshan</Link></h2>
      
 

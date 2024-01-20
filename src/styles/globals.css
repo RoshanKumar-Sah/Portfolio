@@ -8,6 +8,14 @@ body{
   background-color: #ffffff;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+.Toastify__toast-container--bottom-right {
+  margin-bottom: 5%;
+}
+
 .navLiDay{
   background: linear-gradient(to right, black 50%, white 50%);
   background-size: 200% 200%;
@@ -25,6 +33,7 @@ body{
 .navLiDay:hover, .navLiNight:hover{
   background-position: left bottom;
 }
+
 
 /* .lgContainer{
   padding-left: 70px;
@@ -47,6 +56,10 @@ body{
 
  .animeColor{
     @apply transition-colors duration-1000
+  }
+
+  .detailsKey{
+    @apply font-bold leading-[26px]
   }
 
 }
